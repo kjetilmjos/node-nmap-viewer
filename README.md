@@ -1,4 +1,4 @@
-<h1> Introduction: </h1>
+<h1> Introduction </h1>
 
 The node-nmap-viewer is program to for displaying a nmap scan file in a node web server. It is intended as a network scanner to list all active computers on a specific ip nett. The list will be updated every minute. Database features will also be added with mongoDB to enable more features like computer description etc.
 
@@ -21,7 +21,8 @@ This generates an xml file containing all active computers in the range specifie
 <h3> Node.js </h3>
 This javascript language will run our web server install by typing the following into a terminal
 
-sudo apt-get install nodejs
+sudo apt-get install nodejs <br>
+sudo apt-get install npm
 
 <h3> BASH file </h3>
 
@@ -60,7 +61,9 @@ to view the cron file without editing type
 
 crontab -l
 
+<h2> Starting server</h2>
 
+Download repository to your computer
+Open a terminal and navigate to the software destination. Install dependencies by writing
 
-
-
+sudo npm install
