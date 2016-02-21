@@ -61,15 +61,6 @@ to view the cron file without editing type
 crontab -l
 
 
---lag en sh fil. 
-#!/bin/bash         
-
-nmap -oX /home/kjetil/output.xml -sP 192.168.1.*
----
-
-
-
-
 
 
 
