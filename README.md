@@ -18,6 +18,11 @@ sudo nmap -oX output.xml -sP 192.168.1.*
 
 This generates an xml file containing all active computers in the range specified. * = all addresser (0-255)
 
+<h3> Node.js </h3>
+This javascript language will run our web server install by typing the following into a terminal
+
+sudo apt-get install nodejs
+
 <h3> BASH file </h3>
 
 Edit ip address of the bash.sh file in the repository.
@@ -26,7 +31,7 @@ Make the file executable by typing
 
 chmod +x nmap.sh
 
-<b> Running a command as sudo inside a sh file. </b>
+<b> Running a command as sudo inside a sh file. </b> <br>
 Open a terminal and type 
 sudo visudo 
 Around line 25, you'll see this line: %sudo   ALL=(ALL:ALL) ALL
@@ -45,7 +50,7 @@ select edit via vim and type i
 
 move to the bottom of the file and add the line. Make sure you are using the full and correct path to your sh file.
 
-* * * * * /bin/sh /home/username/nmap.sh
+ " * * * * * /bin/sh /home/username/nmap.sh "
 press ESC 
 press :wq
 
