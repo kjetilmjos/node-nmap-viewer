@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "latest",
-    "xml2js": "latest"
+    "xml2js": "latest",
+    "ejs": "latest"
   }
 }
