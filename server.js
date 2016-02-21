@@ -47,7 +47,7 @@ console.log(ss);
       };
 
     });
-    res.render('index.ejs', {
+    res.render('technet.ejs', {
       ledig: m.diff(i),
       opptatt: i,
     });
