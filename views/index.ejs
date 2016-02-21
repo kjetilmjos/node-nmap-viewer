@@ -1,0 +1,46 @@
+<html>
+
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+</head>
+
+<body>
+
+  <h1>Technet IP oversikt</h1>
+  <table>
+    <th>IP addresser</th>
+    <th>Beskrivelse</th>
+    <th>Status</th>
+    <th>Sist aktiv</th>
+
+    <% for(var i=0; i<ledig.length; i++) {%>
+      <tr>
+        <td>
+          <%= ledig[i] %>
+        </td>
+        <td>nissefest</td>
+        <td>UP</td>
+        <td>2015.02.15</td>
+      </tr>
+      <% } %>
+
+  </table>
+
+
+
+  <h1>Opptatte IP addresser</h1>
+
+  <ul>
+    <% for(var i=0; i<opptatt.length; i++) {%>
+      <li>
+        <%= opptatt[i] %>
+      </li>
+      <% } %>
+  </ul>
+
+
+</body>
+
+</html>
