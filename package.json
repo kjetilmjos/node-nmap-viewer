@@ -4,15 +4,16 @@
   "description": "A web server viewer for an nmap output file ",
   "main": "server.js",
   "repository": {
-  "type": "git",
-  "url": "git://github.com/kjetilmjos/node-nmap-viewer.git"
-},
+    "type": "git",
+    "url": "git://github.com/kjetilmjos/node-nmap-viewer.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kjetil Mjøs",
   "license": "ISC",
   "dependencies": {
-    "express": "latest"
+    "express": "latest",
+    "xml2js": "latest"
   }
 }
