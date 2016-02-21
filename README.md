@@ -1,3 +1,8 @@
+<b> Introduction: </b>
+
+
+
+
 namp for network scanning:
 sudo nmap -oX output.xml -sP 192.168.1.*
 
