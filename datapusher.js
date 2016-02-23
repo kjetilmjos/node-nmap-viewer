@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var models = require('./schemas');
 var fs = require('fs'),
   xml2js = require('xml2js');
+var async = require('async');
 var parser = new xml2js.Parser();
 
 var ipnett = "192.168.1.";
@@ -9,22 +10,34 @@ var iprange = "10";
 
 mongoose.connect("localhost:27017/node_npm_viewer");
 
-//##########################################################################################
-// Make an array with all IP addresses found in the nmap xml file
-fs.readFile(__dirname + '/output.xml', function(err, data) {
-  parser.parseString(data, function(err, result) {
-    arr = [];
-    for (k in result.nmaprun.host) {
-      s = (result.nmaprun.host[k].address[0].$.addr);
-      arr.push(s);
-    }
-    console.log(arr);
+var arr = [];
+
+var readxml = function(callback) {
+  //##########################################################################################
+  // Make an array with all IP addresses found in the nmap xml file
+
+  fs.readFile(__dirname + '/output.xml', function(err, data) {
+    parser.parseString(data, function(err, result) {
+      //var  arr = [];
+      for (k in result.nmaprun.host) {
+        s = (result.nmaprun.host[k].address[0].$.addr);
+        arr.push(s);
+      }
+      console.log(arr);
+    });
+    return callback();
   });
-});
+  //##########################################################################################
+  //process.exit();
+
+};
 
 
-//##########################################################################################
-
+var mitten = function(callback) {
+  //console.log("mitten");
+  return callback();
+  //process.exit();
+};
 
 // sjekk om det finnes ip addresser
 
@@ -41,40 +54,60 @@ for (var l = 1; l < 255; l++) {
   m.push("166.166.0." + l);
 }
 */
-//--saving------------
+//--saving-----------
 
-//##########################################################################################
-// Checking to see if database is empty
-models.Computers.find({}, {}, {}, function(err, result) {
-  if (result[0] !== undefined) {
-    console.log("Found data: " + result);
-    process.exit();
-  } else {
-    console.log("No data found, creating.... ");
-    //##########################################################################################
-    //Storing new computers to the database
-    for (var l = 1; l < iprange; l++) {
-      var newComputer = new models.Computers();
 
-      newComputer.ip = ipnett + l;
-      newComputer.description = "dummy description";
-      newComputer.state = 1;
-      newComputer.date = new Date().getTime();
+var checkip = function(callback) {
 
-      newComputer.save(function(err, thor) {
-        if (err) return console.error(err);
-        else {
-          console.log("New IP saved")
-            //
-        }
-      });
-      //  process.exit();
+  //##########################################################################################
+  // Checking to see if database is empty
+  models.Computers.find({}, {}, {}, function(err, result) {
+    if (result[0] !== undefined) {
+      console.log("Found data: " + result);
+      process.exit();
+    } else {
+      console.log("No data found, creating.... ");
+      //##########################################################################################
+      //Storing new computers to the database
+      for (var l = 1; l < iprange; l++) {
+
+        var newComputer = new models.Computers();
+
+        newComputer.ip = ipnett + l;
+        newComputer.description = "dummy description";
+        newComputer.state = 1;
+        newComputer.date = new Date().getTime();
+
+        newComputer.save(function(err, thor) {
+          if (err){
+          console.log(err);
+              return callback(err);
+          }
+          else {
+            console.log("New IP saved");
+          }
+        });
+        //  process.exit();
+      }
+
+ ///return callback();
+      //##########################################################################################
     }
+    //  return callback();
+  });
+  //##########################################################################################
+  //process.exit();
 
-    //##########################################################################################
-  }
+};
+
+async.series([
+  readxml,
+  checkip
+], function(err) {
+  console.log("Work done, closing program....");
+  process.exit();
 });
-//##########################################################################################
+
 
 
 
