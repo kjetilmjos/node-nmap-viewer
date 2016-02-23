@@ -17,6 +17,7 @@
     "xml2js": "latest",
     "ejs": "latest",
     "mongoose": "latest",
-    "mongodb": "latest"
+    "mongodb": "latest",
+    "async": "latest"
   }
 }
