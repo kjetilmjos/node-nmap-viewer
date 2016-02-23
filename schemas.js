@@ -1,33 +1,15 @@
-// load the things we need
 var mongoose = require('mongoose');
 
-// define the schema for our user model
-var NodeSchema = mongoose.Schema({
-/*
-var UserSchema = mongoose.Schema({
-  name: String,
-  email: String,
-  points: Number,
-  last_reset: Date,
-  approver: String,
-  point_limit : Number,
-});
-*/
-
-var IpSchema = mongoose.Schema({
+var ComputerSchema = mongoose.Schema({
   ip: String,
   description: String,
   state: Boolean,
-  date: {
-    type: Date,
-    default: Date.now
-  },
+  date: {type: Date}
 });
 
 // create the model for users and expose it to our app
-var Ipoverview = mongoose.model('Ipoverview', IpSchema);
-
+var Computers = mongoose.model('Computers', ComputerSchema);
 
 module.exports = {
-  Ipoverview: Ipoverview,
+  Computers: Computers,
 };

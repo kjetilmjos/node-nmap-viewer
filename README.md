@@ -12,7 +12,7 @@ NMAP is a sofisticated network scanning tool for both UNIX and Windows. https://
 
 sudo apt-get install nmap
 
-Test it by running 
+Test it by running
 
 sudo nmap -oX output.xml -sP 192.168.1.*
 
@@ -33,18 +33,37 @@ Make the file executable by typing
 chmod +x nmap.sh
 
 <b> Running a command as sudo inside a sh file. </b> <br>
-Open a terminal and type 
-sudo visudo 
+Open a terminal and type
+sudo visudo
 Around line 25, you'll see this line: %sudo   ALL=(ALL:ALL) ALL
 Below that line, insert the following line, where username is your username:
 username  ALL=(ALL) NOPASSWD: /home/username/nmap.sh
 Exit the editor (Ctrl+X if nano)
 
+<h3> MongoDB </h3>
+
+Open terminal and type:
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+restart computer
+Make a folder to store your data in. example folder /home/username/mongodata
+
+Start the mongodb service by typing:
+mongod --dbpath /home/username/mongodata
+
+<h3> Robomongo </h3>
+https://robomongo.org/download
+
+Download coorect version and unpack file.
+Install not nessecary, run directly from bin folder.
+
 <h3> Configure CRON job </h3>
 
 The bash file created above is going to be runned every minute. This is done via CRON.
 
-Open a terminal and type 
+Open a terminal and type
 crontab -e
 
 select edit via vim and type i
@@ -52,12 +71,12 @@ select edit via vim and type i
 move to the bottom of the file and add the line. Make sure you are using the full and correct path to your sh file.
 
  " * * * * * /bin/sh /home/username/nmap.sh "
-press ESC 
+press ESC
 press :wq
 
 Verify that the xml file is updated every minute.
 
-to view the cron file without editing type 
+to view the cron file without editing type
 
 crontab -l
 

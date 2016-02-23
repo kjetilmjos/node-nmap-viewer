@@ -15,6 +15,8 @@
   "dependencies": {
     "express": "latest",
     "xml2js": "latest",
-    "ejs": "latest"
+    "ejs": "latest",
+    "mongoose": "latest",
+    "mongodb": "latest"
   }
 }
