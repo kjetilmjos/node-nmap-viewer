@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
 
+
 var ComputerSchema = mongoose.Schema({
   ip: String,
   description: String,
-  state: Boolean,
+  state: String,
   date: {type: Date}
 });
 
