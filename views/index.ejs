@@ -15,31 +15,18 @@
     <th>Status</th>
     <th>Sist aktiv</th>
 
-    <% for(var i=0; i<ledig.length; i++) {%>
+    <% for(var i=0; i<data.length; i++) {%>
       <tr>
         <td>
-          <%= ledig[i] %>
+          <%= data[i].ip %>
         </td>
-        <td>nissefest</td>
-        <td>UP</td>
-        <td>2015.02.15</td>
+        <td><%= data[i].description %></td>
+        <td><%= data[i].state %></td>
+        <td><%= data[i].date %></td>
       </tr>
       <% } %>
 
   </table>
-
-
-
-  <h1>Opptatte IP addresser</h1>
-
-  <ul>
-    <% for(var i=0; i<opptatt.length; i++) {%>
-      <li>
-        <%= opptatt[i] %>
-      </li>
-      <% } %>
-  </ul>
-
 
 </body>
 
