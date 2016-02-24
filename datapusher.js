@@ -107,6 +107,43 @@ var checkip = function(callback) {
   //process.exit();
 
 };
+/*
+  //##########################################################################################
+  models.Done_Task.find({
+  user: {
+    $in: query ( arrayet som heter arrip.) Oppdater status og dato på alle iper in query array
+  },
+  
+  users_to_approve.forEach(function(item) {
+    bruk søkeresultatet over og kjør en for each på det.
+    
+  }
+  example of how to update fields
+    // APPROVE TASK  =========================
+  app.post('/husmor/approve_task', isLoggedIn, function(req, res) {
+    models.Done_Task.update({
+      _id: req.body.id
+    }, {
+      approved: true,
+    }, function(err, rawResponse) {
+
+      models.User.find({
+        email: req.body.usermail
+      }, {}, {}, function(err, userpoint) {
+
+        models.User.update({
+          _id: userpoint[0]._id
+        }, {
+          points: +userpoint[0].points + +req.body.task_points,
+        }, function(err, rawResponse) {
+          res.send("Sucess");
+        })
+      })
+    })
+  });
+
+    //##########################################################################################
+*/
 
 async.series([
   createarray,
