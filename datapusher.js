@@ -10,7 +10,15 @@ var iprange = "10";
 
 mongoose.connect("localhost:27017/node_npm_viewer");
 
-var arr = [];
+var arrhosts = [];
+var arrip = [];
+
+var createarray = function(callback) {
+   for (var l = 1; l < iprange; l++) {
+     arrip.push(ipnett+iprange);
+   }
+}
+
 
 var readxml = function(callback) {
   //##########################################################################################
@@ -21,9 +29,9 @@ var readxml = function(callback) {
       //var  arr = [];
       for (k in result.nmaprun.host) {
         s = (result.nmaprun.host[k].address[0].$.addr);
-        arr.push(s);
+        arrhosts.push(s);
       }
-      console.log(arr);
+      console.log(arrhosts);
     });
     return callback();
   });
@@ -101,8 +109,9 @@ var checkip = function(callback) {
 };
 
 async.series([
+  createarray,
   readxml,
-  checkip
+  checkip,
 ], function(err) {
   console.log("Work done, closing program....");
   process.exit();
