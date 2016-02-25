@@ -17,21 +17,25 @@ var createarray = function(callback) {
   for (var l = 1; l < iprange; l++) {
     arrip.push(ipnett + l);
   }
-  return callback();
+  console.log("array generated");
+  callback();
 };
 //##########################################################################################
 // Make an array with all IP addresses found in the nmap xml file
 var readxml = function(callback) {
   fs.readFile(__dirname + '/output.xml', function(err, data) {
-    parser.parseString(data, function(err, result) {
-      //var  arr = [];
-      for (k in result.nmaprun.host) {
-        s = (result.nmaprun.host[k].address[0].$.addr);
-        arrhosts.push(s);
-      }
-      console.log(arrhosts);
-    });
-    return callback();
+    if (err) {
+      callback("exit");
+    } else {
+      parser.parseString(data, function(err, result) {
+        for (k in result.nmaprun.host) {
+          s = (result.nmaprun.host[k].address[0].$.addr);
+          arrhosts.push(s);
+        }
+        console.log(arrhosts);
+      });
+      callback();
+    }
   });
   //##########################################################################################
 
@@ -40,11 +44,12 @@ var readxml = function(callback) {
 //##########################################################################################
 // Checking to see if database is empty
 var checkip = function(callback) {
+  var itemsProcessed = 0;
   models.Computers.find({}, {}, {}, function(err, result) {
     if (result[0] !== undefined) {
       console.log("Found data: ");
-      //return callback();
-      return callback();
+      callback();
+
     } else {
       console.log("No data found, creating.... ");
       //##########################################################################################
@@ -62,11 +67,16 @@ var checkip = function(callback) {
           if (err) {
             console.log(err);
           } else {
-            console.log("New IP saved");
-
+            console.log("New IP saved " + item);
+            itemsProcessed++;
+            if (itemsProcessed === arrip.length) {
+              console.log("All new IP's saved");
+              callback();
+            }
           }
 
         });
+
       });
     }
 
@@ -76,7 +86,8 @@ var checkip = function(callback) {
 //##########################################################################################
 // Update state on all active computers
 var updatecomputers = function(callback) {
-  arrhosts.forEach(function(item, callback) {
+  var itemsProcessed = 0;
+  arrhosts.forEach(function(item) {
     models.Computers.update({
         ip: item
       }, {
@@ -85,7 +96,13 @@ var updatecomputers = function(callback) {
       },
       function(err, rawResponse) {
 
+        itemsProcessed++;
+        if (itemsProcessed === arrhosts.length) {
+          console.log("All updates done");
+          callback();
+        }
       });
+
   });
 };
 //##########################################################################################
@@ -93,7 +110,7 @@ var updatecomputers = function(callback) {
 async.series([
   createarray,
   readxml,
-  checkip,
+   checkip,
   updatecomputers,
 ], function(err) {
   console.log("Work done, closing program....");
