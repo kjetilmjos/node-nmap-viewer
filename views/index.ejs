@@ -17,7 +17,11 @@
     <th>Sist aktiv</th>
 
     <% for(var i=0; i<data.length; i++) {%>
-      <tr bgcolor="#91F291">
+      <tr     <% if(data[i].state == "ON"){ %>
+      <%= bgcolor="#91F291" %>
+        <% } else{ %>
+          bgcolor="#E0E0E0"
+          <% } %>>
         <td>
           <%= data[i].ip %>
         </td>
