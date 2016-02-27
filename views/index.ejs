@@ -3,7 +3,8 @@
 <head>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script src="../static/jquery-2.2.1.min.js"></script>
+  <script src="../static/index.js"></script>
 </head>
 
 <body>
@@ -17,17 +18,23 @@
     <th>Sist aktiv</th>
 
     <% for(var i=0; i<data.length; i++) {%>
-      <tr     <% if(data[i].state == "ON"){ %>
-      <%= bgcolor="#91F291" %>
+      <tr <% if(data[i].state=="OFF" ){ %>
         <% } else{ %>
-          bgcolor="#E0E0E0"
+          bgcolor="#78AB46"
           <% } %>>
-        <td>
-          <%= data[i].ip %>
-        </td>
-        <td><%= data[i].description %></td>
-        <td><%= data[i].state %></td>
-        <td><%= data[i].date %></td>
+            <td>
+              <%= data[i].ip %>
+            </td>
+            <td>
+              <%= data[i].description %>
+              <button onclick="test();">edit </button>
+            </td>
+            <td>
+              <%= data[i].state %>
+            </td>
+            <td>
+              <%= data[i].date %>
+            </td>
       </tr>
       <% } %>
 
