@@ -3,20 +3,24 @@
 <head>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <script src="../static/jquery-2.2.1.min.js"></script>
+   <script src="../static/jquery-2.2.1.min.js"></script>
   <script src="../static/index.js"></script>
+    <link rel="stylesheet" href="../static/jquery-ui.min.css" />
+
+
 </head>
 
 <body>
 
-
   <h1>Technet IP oversikt</h1>
   <table>
+    <thead class='ui-widget-header'>
     <th>IP addresser</th>
     <th>Beskrivelse</th>
     <th>Status</th>
     <th>Sist aktiv</th>
-
+  </thead>
+<tbody class='ui-widget-content'>
     <% for(var i=0; i<data.length; i++) {%>
       <tr <% if(data[i].state=="OFF" ){ %>
         <% } else{ %>
@@ -37,7 +41,7 @@
             </td>
       </tr>
       <% } %>
-
+</tbody>
   </table>
 
 </body>
