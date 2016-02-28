@@ -24,3 +24,14 @@ app.get('/', function(req, res) {
   });
 
 });
+
+app.post('/changedesc', function(req, res) {
+  models.Computers.update({
+    ip: req.ip
+  }, {
+    description: req.description,
+  }, function(err, rawResponse) {
+    //handle it
+  })
+  res.send("Updated");
+});
