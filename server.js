@@ -4,10 +4,18 @@ var app      = express();
 var http = require('http').Server(app);
 var mongoose = require('mongoose');
 var models = require('./schemas');
+var bodyParser   = require('body-parser');
+var morgan       = require('morgan');
+
 mongoose.connect("localhost:27017/node_npm_viewer");
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 app.use('/static', express.static('views'));
+
+// set up our express application
+app.use(morgan('dev')); // log every request to the console
+app.use(bodyParser.json()); // get information from html forms
+app.use(bodyParser.urlencoded({ extended: true }));
 
 http.listen(3001, function() {
 
@@ -27,11 +35,12 @@ app.get('/', function(req, res) {
 
 app.post('/changedesc', function(req, res) {
   models.Computers.update({
-    ip: req.ip
+    ip: req.body.computerip,
   }, {
-    description: req.description,
+    description: req.body.description,
   }, function(err, rawResponse) {
     //handle it
   })
-  res.send("Updated");
+  res.send("sucess");
+
 });

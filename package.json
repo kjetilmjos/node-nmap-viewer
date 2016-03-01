@@ -18,6 +18,8 @@
     "ejs": "latest",
     "mongoose": "latest",
     "mongodb": "latest",
-    "async": "latest"
+    "async": "latest",
+    "body-parser": "latest",
+    "morgan": "latest"
   }
 }
