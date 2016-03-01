@@ -5,13 +5,16 @@ var fs = require('fs'),
 var async = require('async');
 var parser = new xml2js.Parser();
 
-var ipnett = "192.168.1."; // Set your IP range nett. Same as found in nmap bash file.
+var ipnett = "192.168.10."; // Set your IP range nett. Same as found in nmap bash file.
 var iprange = "255"; // select the range you want scanned.
 
 mongoose.connect("localhost:27017/node_npm_viewer");
 
 var arrhosts = [];
 var arrip = [];
+var arron = [];
+
+
 
 var createarray = function(callback) {
   for (var l = 1; l < iprange; l++) {
@@ -20,18 +23,29 @@ var createarray = function(callback) {
   console.log("Ip range array generated");
   callback();
 };
+
+var comparearray = function(callback) {
+arron = arrip.filter(function(x) { return arrhosts.indexOf(x) < 0 })
+  callback();
+};
 //##########################################################################################
 // Make an array with all IP addresses found in the nmap xml file
 var readxml = function(callback) {
   fs.readFile(__dirname + '/output.xml', function(err, data) {
-      parser.parseString(data, function(err, result) {
+    parser.parseString(data, function(err, result) {
+      if (!err) {
         for (k in result.nmaprun.host) {
           s = (result.nmaprun.host[k].address[0].$.addr);
           arrhosts.push(s);
         }
+
         console.log("The following active hosts where found: " + arrhosts);
-      });
-      callback();
+      } else {
+        console.log("error");
+        //    callback();
+      }
+    });
+    callback();
 
   });
   //##########################################################################################
@@ -47,7 +61,7 @@ var checkip = function(callback) {
       console.log("Found data, updating..");
 
       var itemsProcessed = 0;
-      arrip.forEach(function(item) {
+      arron.forEach(function(item) {
         models.Computers.update({
             ip: item
           }, {
@@ -56,12 +70,11 @@ var checkip = function(callback) {
           function(err, rawResponse) {
 
             itemsProcessed++;
-            if (itemsProcessed === arrip.length) {
+            if (itemsProcessed === arron.length) {
               console.log("All statuses set to OFF");
               callback();
             }
           });
-
       });
 
     } else {
@@ -117,19 +130,21 @@ var updatecomputers = function(callback) {
   });
 };
 //##########################################################################################
-setInterval(function(){
-async.series([
-  createarray,
-  readxml,
-  checkip,
-  updatecomputers,
-], function(err) {
-  arrhosts = [];
-  arrip = [];
-  console.log("Work done, closing program....");
-  //process.exit(1);
-});
-}, 2000)
+setInterval(function() {
+  async.series([
+    createarray,
+    readxml,
+    comparearray,
+    checkip,
+    updatecomputers,
+  ], function(err) {
+    arrhosts = [];
+    arrip = [];
+    arron = [];
+    console.log("Work done, closing program....");
+    //process.exit(1);
+  });
+}, 10000)
 
 // If the nmap command is runned as sudo you can get computer name. Use the string below to access computer name
 // result.nmaprun.host[k].hostnames[0].hostname[0].$.name
