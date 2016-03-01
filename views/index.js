@@ -1,16 +1,16 @@
 function changedescription(ip) {
   var description = prompt("Enter new description for IP " + ip);
   if (description != null) {
-    return $.ajax({
+ $.ajax({
    url: "/changedesc",
    type: "POST",
    data: {
-     "ip": ip,
+     "computerip": ip,
      "description": description,
    },
-   success: function() {
+   success: function(data) {
      location.reload();
-   }
+  }
  });
   }
 }
