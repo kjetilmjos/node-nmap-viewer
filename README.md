@@ -26,11 +26,13 @@ sudo apt-get install npm
 
 <h3> BASH file </h3>
 
-Edit ip address of the bash.sh file in the repository.
+Edit ip address and filepath of the .sh files in the repository.
 
 Make the file executable by typing
-
-chmod +x nmap.sh
+'''
+chmod +x filename.sh  
+'''
+ Do this for all files
 
 <b> Running a command as sudo inside a sh file. </b> <br>
 Open a terminal and type
@@ -70,7 +72,13 @@ select edit via vim and type i
 
 move to the bottom of the file and add the line. Make sure you are using the full and correct path to your sh file.
 
- " * * * * * /bin/sh /home/username/nmap.sh "
+'''
+ * * * * * /bin/sh /home/kjetil/start_nmap.sh # JOB_ID_1
+
+@reboot /bin/sh /home/kjetil/start_mongodb.sh # JOB_ID_2
+@reboot /bin/sh /home/kjetil/start_datapusher.sh # JOB_ID_3
+@reboot /bin/sh /home/kjetil/start_webserver.sh # JOB_ID_4
+'''
 press ESC
 press :wq
 
