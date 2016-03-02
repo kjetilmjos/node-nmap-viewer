@@ -5,15 +5,13 @@ var fs = require('fs'),
 var async = require('async');
 var parser = new xml2js.Parser();
 
-var ipnett = "192.168.10."; // Set your IP range nett. Same as found in nmap bash file.
+var ipnett = "166.166.0."; // Set your IP range nett. Same as found in nmap bash file.
 var iprange = "255"; // select the range you want scanned.
 
 mongoose.connect("localhost:27017/node_npm_viewer");
 
 var arrhosts = [];
 var arrip = [];
-var arron = [];
-
 
 
 var createarray = function(callback) {
@@ -24,10 +22,6 @@ var createarray = function(callback) {
   callback();
 };
 
-var comparearray = function(callback) {
-arron = arrip.filter(function(x) { return arrhosts.indexOf(x) < 0 })
-  callback();
-};
 //##########################################################################################
 // Make an array with all IP addresses found in the nmap xml file
 var readxml = function(callback) {
@@ -41,8 +35,8 @@ var readxml = function(callback) {
 
         console.log("The following active hosts where found: " + arrhosts);
       } else {
-        console.log("error");
-        //    callback();
+        console.log("unable to read xml file");
+            
       }
     });
     callback();
@@ -61,7 +55,7 @@ var checkip = function(callback) {
       console.log("Found data, updating..");
 
       var itemsProcessed = 0;
-      arron.forEach(function(item) {
+      arrip.forEach(function(item) {
         models.Computers.update({
             ip: item
           }, {
@@ -70,7 +64,7 @@ var checkip = function(callback) {
           function(err, rawResponse) {
 
             itemsProcessed++;
-            if (itemsProcessed === arron.length) {
+            if (itemsProcessed === arrip.length) {
               console.log("All statuses set to OFF");
               callback();
             }
@@ -134,13 +128,11 @@ setInterval(function() {
   async.series([
     createarray,
     readxml,
-    comparearray,
     checkip,
     updatecomputers,
   ], function(err) {
     arrhosts = [];
     arrip = [];
-    arron = [];
     console.log("Work done, closing program....");
     //process.exit(1);
   });
