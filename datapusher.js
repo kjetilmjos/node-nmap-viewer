@@ -12,6 +12,7 @@ mongoose.connect("localhost:27017/node_npm_viewer");
 
 var arrhosts = [];
 var arrip = [];
+var arron = [];
 var fault = false;
 
 var createarray = function(callback) {
@@ -20,6 +21,18 @@ var createarray = function(callback) {
   }
   console.log("Ip range array generated");
   callback();
+};
+
+var createonarray = function(callback) {
+  arron = arrip.filter( function( el ) {
+    return arrhosts.indexOf( el ) < 0;
+  }
+
+);
+console.log("hosts to be set to OFF: " + arron);
+  callback();
+
+
 };
 
 //##########################################################################################
@@ -33,7 +46,7 @@ var readxml = function(callback) {
           arrhosts.push(s);
         }
 
-        console.log("The following active hosts where found: " + arrhosts);
+        //console.log("The following active hosts where found: " + arrhosts);
       } else {
         console.log("unable to read xml file");
         fault = true;
@@ -49,15 +62,13 @@ var readxml = function(callback) {
 //##########################################################################################
 // Checking to see if database is empty
 var checkip = function(callback) {
-  if (fault == false) {
-    callback();
-  }
+
   var itemsProcessed = 0;
   models.Computers.find({}, {}, {}, function(err, result) {
     if (result[0] !== undefined) {
       console.log("Found data, updating..");
       var itemsProcessed = 0;
-      arrip.forEach(function(item) {
+      arron.forEach(function(item) {
         models.Computers.update({
             ip: item
           }, {
@@ -66,7 +77,7 @@ var checkip = function(callback) {
           function(err, rawResponse) {
 
             itemsProcessed++;
-            if (itemsProcessed === arrip.length) {
+            if (itemsProcessed === arron.length) {
               console.log("All statuses set to OFF");
               callback();
             }
@@ -74,6 +85,7 @@ var checkip = function(callback) {
       });
 
     } else {
+
       console.log("No data found, creating.... ");
       //##########################################################################################
       //Storing new computers to the database
@@ -101,6 +113,8 @@ var checkip = function(callback) {
       });
     }
   });
+
+
 };
 
 //##########################################################################################
@@ -130,11 +144,13 @@ setInterval(function() {
   async.series([
     createarray,
     readxml,
+    createonarray,
     checkip,
     updatecomputers,
   ], function(err) {
     arrhosts = [];
     arrip = [];
+arron = [];
     fault = false;
     console.log("Work done, closing program....");
     //process.exit(1);
