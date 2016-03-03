@@ -12,7 +12,7 @@ mongoose.connect("localhost:27017/node_npm_viewer");
 
 var arrhosts = [];
 var arrip = [];
-var fault = 0;
+var fault = false;
 
 var createarray = function(callback) {
   for (var l = 1; l < iprange; l++) {
@@ -36,7 +36,7 @@ var readxml = function(callback) {
         console.log("The following active hosts where found: " + arrhosts);
       } else {
         console.log("unable to read xml file");
-            fault = 1;
+        fault = true;
       }
     });
     callback();
@@ -49,11 +49,13 @@ var readxml = function(callback) {
 //##########################################################################################
 // Checking to see if database is empty
 var checkip = function(callback) {
+  if (fault == false) {
+    callback();
+  }
   var itemsProcessed = 0;
   models.Computers.find({}, {}, {}, function(err, result) {
-    if (result[0] !== undefined && fault === 0 ) {
+    if (result[0] !== undefined) {
       console.log("Found data, updating..");
-
       var itemsProcessed = 0;
       arrip.forEach(function(item) {
         models.Computers.update({
@@ -133,7 +135,7 @@ setInterval(function() {
   ], function(err) {
     arrhosts = [];
     arrip = [];
-fault = 0;
+    fault = false;
     console.log("Work done, closing program....");
     //process.exit(1);
   });
