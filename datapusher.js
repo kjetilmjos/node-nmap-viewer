@@ -31,8 +31,6 @@ var createonarray = function(callback) {
 );
 console.log("hosts to be set to OFF: " + arron);
   callback();
-
-
 };
 
 //##########################################################################################
@@ -41,6 +39,7 @@ var readxml = function(callback) {
   fs.readFile(__dirname + '/output.xml', function(err, data) {
     parser.parseString(data, function(err, result) {
       if (!err) {
+arrhosts = [];
         for (k in result.nmaprun.host) {
           s = (result.nmaprun.host[k].address[0].$.addr);
           arrhosts.push(s);
@@ -65,7 +64,7 @@ var checkip = function(callback) {
 
   var itemsProcessed = 0;
   models.Computers.find({}, {}, {}, function(err, result) {
-    if (result[0] !== undefined) {
+    if (result[0] !== undefined && fault == false) {
       console.log("Found data, updating..");
       var itemsProcessed = 0;
       arron.forEach(function(item) {
@@ -84,7 +83,7 @@ var checkip = function(callback) {
           });
       });
 
-    } else {
+    } else if (fault == false) {
 
       console.log("No data found, creating.... ");
       //##########################################################################################
@@ -113,7 +112,7 @@ var checkip = function(callback) {
       });
     }
   });
-
+callback();
 
 };
 
@@ -148,9 +147,12 @@ setInterval(function() {
     checkip,
     updatecomputers,
   ], function(err) {
-    arrhosts = [];
+    
     arrip = [];
 arron = [];
+
+
+
     fault = false;
     console.log("Work done, closing program....");
     //process.exit(1);
