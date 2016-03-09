@@ -60,13 +60,16 @@ echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" 
 sudo apt-get update
 sudo apt-get install -y mongodb-org
 ```
-restart computer
+Restart your computer.
 Make a folder to store your data in. example folder /home/username/mongodata
 
 Start the mongodb service by typing:
+``` Bash
 mongod --dbpath /home/username/mongodata
-
+``` 
 <h3> Robomongo </h3>
+This is a nice free tool for viewing mongodb data through a GUI.
+
 https://robomongo.org/download
 
 Download coorect version and unpack file.
@@ -77,31 +80,34 @@ Install not nessecary, run directly from bin folder.
 The bash file created above is going to be runned every minute. This is done via CRON.
 
 Open a terminal and type
+``` Bash
 crontab -e
-
+``` 
 select edit via vim and type i
 
 move to the bottom of the file and add the line. Make sure you are using the full and correct path to your sh file.
 
-///
+``` Bash
  * * * * * /bin/sh /home/kjetil/start_nmap.sh # JOB_ID_1
 
 @reboot /bin/sh /home/kjetil/start_mongodb.sh # JOB_ID_2
 @reboot /bin/sh /home/kjetil/start_datapusher.sh # JOB_ID_3
 @reboot /bin/sh /home/kjetil/start_webserver.sh # JOB_ID_4
-///
+``` 
 press ESC
 press :wq
 
 Verify that the xml file is updated every minute.
 
 to view the cron file without editing type
-
+``` Bash
 crontab -l
-
+``` 
 <h2> Starting server</h2>
 
 Download repository to your computer
 Open a terminal and navigate to the software destination. Install dependencies by writing
-
+``` Bash
 sudo npm install
+``` 
+Restart your computer and visit localhost:3001 to verify that the server is working
