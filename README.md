@@ -9,20 +9,20 @@ The program is made to run on Ubuntu 15.10 and the readme will include all relev
 <h3> NMAP </h3>
 
 NMAP is a sofisticated network scanning tool for both UNIX and Windows. https://nmap.org/
-
+``` Bash
 sudo apt-get install nmap
-
+``` 
 Test it by running
-
+``` Bash
 sudo nmap -oX output.xml -sP 192.168.1.*
-
+```
 This generates an xml file containing all active computers in the range specified. * = all addresser (0-255)
 
 <h3> Node.js </h3>
 This javascript language will run our web server install by typing the following into a terminal
 
-``` bash
-sudo apt-get install nodejs <br>
+``` Bash
+sudo apt-get install nodejs 
 sudo apt-get install npm
 ```
 
@@ -31,26 +31,35 @@ sudo apt-get install npm
 Edit ip address and filepath of the .sh files in the repository.
 
 Make the file executable by typing
-'''
+``` Bash
 chmod +x filename.sh  
-'''
+``` 
  Do this for all files
 
 <b> Running a command as sudo inside a sh file. </b> <br>
 Open a terminal and type
+``` Bash
 sudo visudo
-Around line 25, you'll see this line: %sudo   ALL=(ALL:ALL) ALL
+``` 
+Around line 25, you'll see this line: 
+``` Bash  
+%sudo   ALL=(ALL:ALL) ALL
+``` 
 Below that line, insert the following line, where username is your username:
+``` Bash
 username  ALL=(ALL) NOPASSWD: /home/username/nmap.sh
+``` 
 Exit the editor (Ctrl+X if nano)
 
 <h3> MongoDB </h3>
 
 Open terminal and type:
+``` Bash
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 sudo apt-get update
 sudo apt-get install -y mongodb-org
+```
 restart computer
 Make a folder to store your data in. example folder /home/username/mongodata
 
