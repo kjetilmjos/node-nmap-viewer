@@ -21,7 +21,7 @@ This generates an xml file containing all active computers in the range specifie
 <h3> Node.js </h3>
 This javascript language will run our web server install by typing the following into a terminal
 
-```
+``` bash
 sudo apt-get install nodejs <br>
 sudo apt-get install npm
 ```
