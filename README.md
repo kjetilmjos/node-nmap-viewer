@@ -4,6 +4,8 @@ The node-nmap-viewer is program to for displaying a nmap scan file in a node web
 
 The program is made to run on Ubuntu 15.10 and the readme will include all relevant information to get it working on a stock Ubuntu 15.10 system.
 
+The picture below shows the webpage that will be displayed when the program is running.
+
 ![alt tag](https://raw.githubusercontent.com/kjetilmjos/node-nmap-viewer/master/Ip overview.PNG)
 
 <h2> Installation of packages </h2>
