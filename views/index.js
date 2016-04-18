@@ -1,5 +1,5 @@
-function changedescription(ip) {
-  var description = prompt("Enter new description for IP " + ip);
+function changedescription(ip, text) {
+  var description = prompt("Enter new description for IP " + ip, text);
   if (description != null) {
  $.ajax({
    url: "/changedesc",
