@@ -38,7 +38,7 @@ console.log("hosts to be set to OFF: " + arron);
 var readxml = function(callback) {
   fs.readFile(__dirname + '/output.xml', function(err, data) {
     parser.parseString(data, function(err, result) {
-      if (!err && result.nmaprun.host[0] !== undefined) {
+      if (!err && JSON.stringify(result) !== undefined) {
 arrhosts = [];
         for (k in result.nmaprun.host) {
           s = (result.nmaprun.host[k].address[0].$.addr);
