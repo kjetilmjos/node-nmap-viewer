@@ -9,7 +9,10 @@ The picture below shows the webpage that will be displayed when the program is r
 ![alt tag](https://raw.githubusercontent.com/kjetilmjos/node-nmap-viewer/master/Ip overview.PNG)
 
 <h2> Installation of packages </h2>
-
+- Nmap
+- NodeJS and npm
+- MongDB
+- 
 <h3> NMAP </h3>
 
 NMAP is a sofisticated network scanning tool for both UNIX and Windows. https://nmap.org/
