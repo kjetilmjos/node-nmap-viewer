@@ -11,6 +11,7 @@ mongoose.connect("localhost:27017/node_npm_viewer");
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 app.use('/static', express.static('views'));
+app.use('/node_modules', express.static('node_modules'));
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console

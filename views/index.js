@@ -14,3 +14,10 @@ function changedescription(ip, text) {
  });
   }
 }
+
+$(document).ready(function() 
+    { 
+        $("#myTable").tablesorter(); 
+    } 
+); 
+    

@@ -5,7 +5,7 @@ var fs = require('fs'),
 var async = require('async');
 var parser = new xml2js.Parser();
 
-var ipnett = "166.166.0."; // Set your IP range nett. Same as found in nmap bash file.
+var ipnett = "10.0.2."; // Set your IP range nett. Same as found in nmap bash file.
 var iprange = "255"; // select the range you want scanned.
 
 mongoose.connect("localhost:27017/node_npm_viewer");
