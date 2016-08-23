@@ -20,6 +20,7 @@
     "mongodb": "latest",
     "async": "latest",
     "body-parser": "latest",
-    "morgan": "latest"
+    "morgan": "latest",
+    "tablesort": "latest"
   }
 }
