@@ -114,3 +114,6 @@ Open a terminal and navigate to the software destination. Install dependencies b
 sudo npm install
 ``` 
 Restart your computer and visit localhost:3001 to verify that the server is working
+
+For more nmap commands see:
+http://www.cyberciti.biz/networking/nmap-command-examples-tutorials/
