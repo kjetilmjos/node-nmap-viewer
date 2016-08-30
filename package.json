@@ -21,6 +21,6 @@
     "async": "latest",
     "body-parser": "latest",
     "morgan": "latest",
-    "tablesort": "latest"
+    "tablesorter": "latest"
   }
 }

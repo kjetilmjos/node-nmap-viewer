@@ -1,4 +1,3 @@
-//var app = require('express')();
 var express  = require('express');
 var app      = express();
 var http = require('http').Server(app);
@@ -10,17 +9,17 @@ var morgan       = require('morgan');
 mongoose.connect("localhost:27017/node_npm_viewer");
 
 app.set('view engine', 'ejs'); // set up ejs for templating
-app.use('/static', express.static('views'));
-app.use('/node_modules', express.static('node_modules'));
+app.use('/static', express.static('views')); // enable access to javascript files
+app.use('/node_modules', express.static('node_modules')); // enable access to javascript modules
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
 
-http.listen(3001, function() {
+http.listen(80, function() {
 
-  console.log('listening on *:3001');
+  console.log('listening on *:80');
 
 });
 
