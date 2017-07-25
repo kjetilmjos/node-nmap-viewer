@@ -25,8 +25,11 @@ Open terminal and navigate to folder
 run 'npm install' to install dependencies
 Run nmap and generate an output file. Change the IP with your subnet IP. 
 'sudo nmap -oX output.xml -sP 192.168.10.*'
-write 'sudo nodejs server.js' to start server on port 80. 
-Navigate to http://localhost to verify system working.
+Open datapusher.js and change ipnett to your subnet.
+run 'nodejs datapuser.js'. This will continuesly monitor the output.xml for status updates and push to mongodb. 
+Set up the nmap command in a cron job to make a network scanner that is always running.
+In another terminal window write 'sudo nodejs server.js' to start server on port 8080. 
+Navigate to http://localhost:8080 to verify system working.
 
 
 <h2> Installation of packages </h2>
