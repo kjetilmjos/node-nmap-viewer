@@ -8,6 +8,27 @@ The picture below shows the webpage that will be displayed when the program is r
 
 ![alt tag](https://raw.githubusercontent.com/kjetilmjos/node-nmap-viewer/master/Ip overview.PNG)
 
+<h2> Getting started </h2>
+Install nmap: 'sudo apt install nmap'
+Install Node.js: 'curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -'
+'sudo apt-get install -y nodejs'
+Install MongoDB: 'sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6'
+'echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list'
+'sudo apt-get update'
+'sudo apt-get install -y mongodb-org'
+
+verify that mongodb is running 'sudo systemctl status mongodb'
+Download mongodb viewer Robo 3T: https://robomongo.org/
+
+Clone or download repository and unzip.
+Open terminal and navigate to folder
+run 'npm install' to install dependencies
+Run nmap and generate an output file. Change the IP with your subnet IP. 
+'sudo nmap -oX output.xml -sP 192.168.10.*'
+write 'sudo nodejs server.js' to start server on port 80. 
+Navigate to http://localhost to verify system working.
+
+
 <h2> Installation of packages </h2>
 
 # NMAP
