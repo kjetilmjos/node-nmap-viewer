@@ -17,9 +17,9 @@ app.use(morgan('dev')); // log every request to the console
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
 
-http.listen(80, function() {
+http.listen(8080, function() {
 
-  console.log('listening on *:80');
+  console.log('listening on *:8080');
 
 });
 
